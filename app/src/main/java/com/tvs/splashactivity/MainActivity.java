@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         graphFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SalaryGraphActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putStringArrayListExtra("salaries", salaries);
                 startActivity(intent);

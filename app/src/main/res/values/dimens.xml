@@ -3,4 +3,5 @@
     <dimen name="standard_elevation_six_dp">6dp</dimen>
     <dimen name="sixteen_dp">16dp</dimen>
     <dimen name="five_dp">5dp</dimen>
+    <dimen name="six_dp">6dp</dimen>
 </resources>

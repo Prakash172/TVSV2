@@ -1,6 +1,7 @@
 package com.tvs.splashactivity.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tvs.splashactivity.EmployeeDetailsActivity;
 import com.tvs.splashactivity.R;
 import com.tvs.splashactivity.models.EmployeeData;
 
@@ -64,7 +66,15 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Itme-"+holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, EmployeeDetailsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("name",mEmployeeDataList.get(holder.getAdapterPosition()).getName());
+                intent.putExtra("place",mEmployeeDataList.get(holder.getAdapterPosition()).getPlace());
+                intent.putExtra("date",mEmployeeDataList.get(holder.getAdapterPosition()).getDate());
+                intent.putExtra("salary",mEmployeeDataList.get(holder.getAdapterPosition()).getAmount());
+                intent.putExtra("code",mEmployeeDataList.get(holder.getAdapterPosition()).getCode());
+                intent.putExtra("designation",mEmployeeDataList.get(holder.getAdapterPosition()).getDesignation());
+                mContext.startActivity(intent);
             }
         });
     }
