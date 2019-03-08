@@ -63,8 +63,10 @@ public class LoginActivity extends AppCompatActivity {
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("data", jsonFormattedString);
                         startActivity(intent);
-                    } else
+                    } else{
                         Toast.makeText(this, "Please Enter correct username and password", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
