@@ -1,7 +1,9 @@
 package com.tvs.splashactivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.tvs.splashactivity.adapters.CustomRecyclerViewAdapter;
 import com.tvs.splashactivity.models.EmployeeData;
@@ -31,8 +34,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.graph_fab)
+    FloatingActionButton graphFab;
     private ArrayList<EmployeeData> employeeDataList;
     private CustomRecyclerViewAdapter adapter;
+    private ArrayList<String> salaries;
 
     Context context;
     private String jsonData;
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         context = this;
         setSupportActionBar(toolbar);
         employeeDataList = new ArrayList<>();
+        salaries = new ArrayList<>();
         adapter = new CustomRecyclerViewAdapter(this, employeeDataList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -74,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     employee.setCode(dataArray.getJSONArray(i).getString(3));
                     employee.setDate(dataArray.getJSONArray(i).getString(4));
                     employee.setAmount(dataArray.getJSONArray(i).getString(5));
+                    salaries.add(String.valueOf(Float.parseFloat(dataArray.getJSONArray(i).getString(5).replaceAll("[^\\d.]", ""))));
                     employeeDataList.add(employee);
                 }
                 adapter.updateList(employeeDataList);
@@ -82,6 +90,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             e.printStackTrace();
             Log.i(TAG, "TABLE_DATA return null object");
         }
+
+        graphFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent(getApplicationContext(),DetailsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putStringArrayListExtra("salaries", salaries);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
