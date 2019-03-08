@@ -3,4 +3,5 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="other_details">Other details</string>
+    <string name="title_activity_maps">Employee Locations</string>
 </resources>
