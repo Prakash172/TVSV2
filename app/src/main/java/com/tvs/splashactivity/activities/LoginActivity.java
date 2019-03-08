@@ -1,7 +1,14 @@
 package com.tvs.splashactivity.activities;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -34,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,53 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         progressBar.setVisibility(View.INVISIBLE);
 
+        // check for internet connection
+        if (!isNetworkAvailable()) {
+            createNetworkAlertDialog();
+        }
+    }
+    private void createNetworkAlertDialog() {
+
+        if (alertDialog != null && alertDialog.isShowing()) return;
+        alertDialog = new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Network is not available")
+                .setMessage("Open network setting")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS);
+                        ComponentName cName = new ComponentName("com.android.phone", "com.android.phone.Settings");
+                        intent.setComponent(cName);
+                        startActivity(intent);
+                    }
+                })
+                //set negative button
+                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .show();
+        alertDialog.setCancelable(false);
+        alertDialog.setCanceledOnTouchOutside(false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(alertDialog != null) {
+            if (!isNetworkAvailable()) {
+                createNetworkAlertDialog();
+            } else alertDialog.dismiss();
+        }
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @OnClick(R.id.login)
@@ -80,7 +135,5 @@ public class LoginActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
 }

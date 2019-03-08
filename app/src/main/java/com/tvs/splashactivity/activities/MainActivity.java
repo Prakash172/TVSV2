@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
+            finish();
             return;
         }
 
