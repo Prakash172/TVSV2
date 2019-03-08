@@ -36,6 +36,6 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:id="@+id/graph_fab"
-        android:src="@drawable/ic_graphic_eq_black_24dp"
+        android:src="@drawable/ic_baseline_trending"
         android:focusable="true" />
 </RelativeLayout>

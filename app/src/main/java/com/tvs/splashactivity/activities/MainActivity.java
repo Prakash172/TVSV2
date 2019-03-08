@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private CustomRecyclerViewAdapter adapter;
     private ArrayList<String> salaries;
 
-    Context context;
     private String jsonData;
 
     @Override
@@ -56,9 +55,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        context = this;
         setSupportActionBar(toolbar);
 
+        // Adding location permission
         employeeDataList = new ArrayList<>();
         salaries = new ArrayList<>();
         adapter = new CustomRecyclerViewAdapter(this, employeeDataList);

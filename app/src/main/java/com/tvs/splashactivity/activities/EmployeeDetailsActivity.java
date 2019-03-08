@@ -57,6 +57,7 @@ public class EmployeeDetailsActivity extends AppCompatActivity implements OnMapR
     private static final int CAMERA_REQUEST = 1;
     private static final int MY_CAMERA_PERMISSION_CODE = 2;
     private String place;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class EmployeeDetailsActivity extends AppCompatActivity implements OnMapR
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
+        name = intent.getStringExtra("name");
         String code = intent.getStringExtra("code");
         place = intent.getStringExtra("place");
         String date = intent.getStringExtra("date");
@@ -97,7 +98,7 @@ public class EmployeeDetailsActivity extends AppCompatActivity implements OnMapR
         // Add a marker in Sydney and move the camera
         if(addresses != null) {
             LatLng sydney = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in "+place));
+            mMap.addMarker(new MarkerOptions().position(sydney).title(name+" is in "+place));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 7));
         }else {
             Toast.makeText(this, "Location is not correct", Toast.LENGTH_SHORT).show();
@@ -134,7 +135,6 @@ public class EmployeeDetailsActivity extends AppCompatActivity implements OnMapR
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
-//            photo.setPixel(1280,970,0);
             profileImageView.setImageBitmap(photo);
         }
     }
