@@ -12,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 
 public class PostAsyncTask extends AsyncTask<String,Void,String> {
     String data = "";
-
     private static final String TAG = "PostAsyncTask";
     @Override
     protected String doInBackground(String... params) {

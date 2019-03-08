@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -27,17 +29,21 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     @BindView(R.id.login)
     Button login;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        progressBar.setVisibility(View.INVISIBLE);
+
     }
 
     @OnClick(R.id.login)
     public void onViewClicked() {
-
+        progressBar.setVisibility(View.VISIBLE);
         String name = username.getText().toString();
         String pass = password.getText().toString();
         JSONObject postData = new JSONObject();
@@ -52,12 +58,13 @@ public class LoginActivity extends AppCompatActivity {
                     String data = task.execute("http://tvsfit.mytvs.in/reporting/vrm/api/test_new/int/gettabledata.php", postData.toString()).get();
                     String jsonFormattedString = data.replaceAll("\\\\", "").replace("\"{", "{").replace("}\"", "}");
                     Log.i(TAG, "onViewClicked: " + jsonFormattedString);
-                    if(!TextUtils.isEmpty(data)){
-                        Intent intent = new Intent(this,MainActivity.class);
+                    if (!TextUtils.isEmpty(data)) {
+                        Intent intent = new Intent(this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("data",jsonFormattedString);
+                        intent.putExtra("data", jsonFormattedString);
                         startActivity(intent);
-                    }else Toast.makeText(this, "Please Enter correct username and password", Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(this, "Please Enter correct username and password", Toast.LENGTH_SHORT).show();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
