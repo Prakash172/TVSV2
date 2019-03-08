@@ -1,4 +1,4 @@
-package com.tvs.splashactivity;
+package com.tvs.splashactivity.activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.tvs.splashactivity.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,8 +41,8 @@ public class EmployeeDetailsActivity extends AppCompatActivity {
     @BindView(R.id.profile_imageView)
     ImageView profileImageView;
 
-    private static final int CAMERA_REQUEST = 1888;
-    private static final int MY_CAMERA_PERMISSION_CODE = 100;
+    private static final int CAMERA_REQUEST = 1;
+    private static final int MY_CAMERA_PERMISSION_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

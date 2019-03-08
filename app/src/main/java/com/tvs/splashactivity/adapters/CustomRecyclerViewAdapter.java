@@ -9,9 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.tvs.splashactivity.EmployeeDetailsActivity;
+import com.tvs.splashactivity.activities.EmployeeDetailsActivity;
 import com.tvs.splashactivity.R;
 import com.tvs.splashactivity.models.EmployeeData;
 

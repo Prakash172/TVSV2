@@ -7,6 +7,8 @@
     android:clickable="true"
     android:elevation="@dimen/standard_elevation_six_dp"
     android:focusable="true"
+    android:layout_marginStart="@dimen/six_dp"
+    android:layout_marginEnd="@dimen/six_dp"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/standard_elevation_six_dp">
 

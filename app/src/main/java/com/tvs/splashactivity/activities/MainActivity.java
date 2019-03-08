@@ -1,7 +1,8 @@
-package com.tvs.splashactivity;
+package com.tvs.splashactivity.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -11,12 +12,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tvs.splashactivity.R;
 import com.tvs.splashactivity.adapters.CustomRecyclerViewAdapter;
 import com.tvs.splashactivity.models.EmployeeData;
 
@@ -74,9 +80,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             if (mainObject.getJSONObject("TABLE_DATA") != null) {
                 JSONObject TABLE_DATA = mainObject.getJSONObject("TABLE_DATA");
                 JSONArray dataArray = TABLE_DATA.getJSONArray("data");
-                Log.i(TAG, "array_length" + dataArray.length());
 
-                Log.i(TAG, "Json formatted in async task: " + jsonData);
                 for (int i = 0; i < dataArray.length(); i++) {
                     employee = new EmployeeData();
                     employee.setName(dataArray.getJSONArray(i).getString(0));
@@ -113,7 +117,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         getMenuInflater().inflate(R.menu.search_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("Search People");
+        searchView.setQueryHint("Search Employee");
+        ((EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setHintTextColor(Color.WHITE);
+        ((EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setTextColor(Color.WHITE);
+        ImageView icon = searchView.findViewById(android.support.v7.appcompat.R.id.search_go_btn);
+        icon.setColorFilter(Color.WHITE);
+        ImageView iconClose = searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        iconClose.setColorFilter(Color.WHITE);
         searchView.setOnQueryTextListener(this);
         searchView.setIconified(false);
         return true;

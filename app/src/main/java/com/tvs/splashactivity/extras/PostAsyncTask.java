@@ -1,4 +1,4 @@
-package com.tvs.splashactivity;
+package com.tvs.splashactivity.extras;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -34,12 +34,10 @@ public class PostAsyncTask extends AsyncTask<String,Void,String> {
                 InputStreamReader inputStreamReader = new InputStreamReader(in);
 
                 int inputStreamData = inputStreamReader.read();
-                Log.i(TAG, "doInBackground: inputStreamData"+inputStreamData);
                 while (inputStreamData != -1) {
                     char current = (char) inputStreamData;
                     inputStreamData = inputStreamReader.read();
                     data = data.concat(String.valueOf(current));
-                    Log.i(TAG, "doInBackground: status"+conn.getResponseMessage());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -49,14 +47,11 @@ public class PostAsyncTask extends AsyncTask<String,Void,String> {
                 }
             }
 
-        Log.i(TAG, "doInBackground: data"+data);
             return data;
         }
 
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(data);
-        Log.e("TAG", result); // this is expecting a response code to be sent from your server upon receiving the POST data
     }
-
 }
