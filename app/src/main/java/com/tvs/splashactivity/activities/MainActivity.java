@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             finish();
+            System.exit(0);
             return;
         }
 
@@ -161,7 +162,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         }, 2000);
     }
-
 }
 
 
