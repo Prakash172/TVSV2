@@ -12,6 +12,7 @@
         android:layout_height="56dp"
         android:id="@+id/toolbar"
         app:title="TVS"
+        app:navigationIcon="@drawable/navigation_icon"
         android:background="@color/colorPrimary"
         app:titleTextColor="@android:color/white"/>
 
@@ -20,9 +21,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp" />
-
-
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

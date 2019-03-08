@@ -2,6 +2,9 @@ package com.tvs.splashactivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -50,11 +53,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         ButterKnife.bind(this);
         context = this;
         setSupportActionBar(toolbar);
+
         employeeDataList = new ArrayList<>();
         salaries = new ArrayList<>();
         adapter = new CustomRecyclerViewAdapter(this, employeeDataList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(getResources().getDrawable(R.drawable.divider));
+        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(adapter);
 
         if (getIntent().getStringExtra("data") != null) {

@@ -42,7 +42,7 @@ public class DetailsActivity extends AppCompatActivity {
         Description description =  new Description();
         description.setText("Salaries");
         description.setTextColor(Color.RED);
-        description.setPosition(0,0);
+        description.setTextSize(16);
         barChart.setDescription(description);
         barChart.setFitBars(true);
 

@@ -2,11 +2,13 @@ package com.tvs.splashactivity.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tvs.splashactivity.R;
 import com.tvs.splashactivity.models.EmployeeData;
@@ -56,13 +58,15 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int i) {
         holder.name.setText(mEmployeeDataList.get(i).getName());
-        holder.salary.setText(mEmployeeDataList.get(i).getAmount());
-        holder.date.setText(mEmployeeDataList.get(i).getDate());
-        holder.place.setText(mEmployeeDataList.get(i).getPlace());
         holder.designation.setText(mEmployeeDataList.get(i).getDesignation());
-        holder.code.setText(mEmployeeDataList.get(i).getCode());
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "Itme-"+holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -71,18 +75,12 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.name)
+        @BindView(R.id.name_tv)
         TextView name;
-        @BindView(R.id.designation)
+        @BindView(R.id.designation_tv)
         TextView designation;
-        @BindView(R.id.place)
-        TextView place;
-        @BindView(R.id.code)
-        TextView code;
-        @BindView(R.id.date)
-        TextView date;
-        @BindView(R.id.salary)
-        TextView salary;
+        @BindView(R.id.parent)
+        CardView parent;
 
         ViewHolder(View view) {
             super(view);
